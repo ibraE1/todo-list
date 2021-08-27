@@ -1,5 +1,8 @@
 const project = (title, description) => {
   let tasks = [];
+  const getTitle = () => title;
+  const getDescription = () => description;
+  const getTasks = () => tasks;
   const addTodo = (todo) => {
     tasks.push(todo);
   };
@@ -10,7 +13,7 @@ const project = (title, description) => {
         }
     })
   };
-  return { title, description, tasks, addTodo, removeTodo };
+  return { getTitle, getDescription, getTasks, addTodo, removeTodo };
 };
 
 export { project };
