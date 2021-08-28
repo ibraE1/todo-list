@@ -1,7 +1,6 @@
-const project = (title, description) => {
+const project = (title) => {
   let tasks = [];
   const getTitle = () => title;
-  const getDescription = () => description;
   const getTasks = () => tasks;
   const addTodo = (todo) => {
     tasks.push(todo);
@@ -13,7 +12,7 @@ const project = (title, description) => {
         }
     })
   };
-  return { getTitle, getDescription, getTasks, addTodo, removeTodo };
+  return { getTitle, getTasks, addTodo, removeTodo };
 };
 
 export { project };
