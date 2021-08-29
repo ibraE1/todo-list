@@ -1,32 +1,41 @@
 import { projectList } from "./list";
 
 const displaysProjects = () => {
+  const display = document.createElement("div");
   const projectsDiv = document.createElement("div");
+  const tasksDiv = document.createElement("div");
+  display.id = "content"
   projectsDiv.id = "sidebar";
+  tasksDiv.id = "task-view";
 
   projectList.getProjects().forEach((item) => {
     let title = document.createElement("h2");
-    let tasks = document.createElement("div");
-    title.textContent = item.getTitle();
-
-    item.getTasks().forEach(task => {
+    title.className = "project";
+    title.textContent = `${item.getTitle()} ${item.getTasks().length}`;
+    title.addEventListener("click", () => {
+      title.classList.add("active");
+      item.getTasks().forEach(task => {
         let title = document.createElement("h3");
-        title.textContent = task;
+        title.className = "todo";
+        title.textContent = `⭕ ${task}`;
         
-        tasks.appendChild(title);
+        tasksDiv.appendChild(title);
     });
+    })
 
     projectsDiv.appendChild(title);
-    projectsDiv.appendChild(tasks);
   });
 
-  return projectsDiv;
+  display.appendChild(projectsDiv);
+  display.appendChild(tasksDiv);
+
+  return display;
 };
 
 const loadPage = () => {
-  const content = document.querySelector("#content");
+  const body = document.querySelector("main");
 
-  content.appendChild(displaysProjects());
+  body.appendChild(displaysProjects());
 };
 
 export { loadPage };

@@ -17,6 +17,10 @@ const projectList = (() => {
   return { getProjects, addProject, removeProject };
 })();
 
-projectList.addProject("Inbox");
+projectList.addProject("📥 Inbox");
+projectList.getProjects()[0].addTodo("These");
+projectList.getProjects()[0].addTodo("Are");
+projectList.getProjects()[0].addTodo("Placeholder");
+projectList.getProjects()[0].addTodo("Tasks");
 
 export { projectList };
