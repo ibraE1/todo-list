@@ -1,41 +1,41 @@
-import { projectList } from "./list";
+import { projectList } from "./projectList";
 
-const displaysProjects = () => {
-  const display = document.createElement("div");
+const displayProjects = () => {
+  const content = document.createElement("div");
   const projectsDiv = document.createElement("div");
   const tasksDiv = document.createElement("div");
-  display.id = "content"
+  content.id = "content";
   projectsDiv.id = "sidebar";
-  tasksDiv.id = "task-view";
+  tasksDiv.id = "taskview";
 
-  projectList.getProjects().forEach((item) => {
+  projectList.getProjects().forEach((project) => {
     let title = document.createElement("h2");
     title.className = "project";
-    title.textContent = `${item.getTitle()} ${item.getTasks().length}`;
+    title.textContent = `${project.getTitle()} ${project.getTodos().length}`;
     title.addEventListener("click", () => {
       title.classList.add("active");
-      item.getTasks().forEach(task => {
+      project.getTodos().forEach((todo) => {
         let title = document.createElement("h3");
         title.className = "todo";
-        title.textContent = `⭕ ${task}`;
-        
+        title.textContent = `${todo}`;
+
         tasksDiv.appendChild(title);
+      });
     });
-    })
 
     projectsDiv.appendChild(title);
   });
 
-  display.appendChild(projectsDiv);
-  display.appendChild(tasksDiv);
+  content.appendChild(projectsDiv);
+  content.appendChild(tasksDiv);
 
-  return display;
+  return content;
 };
 
 const loadPage = () => {
   const body = document.querySelector("main");
 
-  body.appendChild(displaysProjects());
+  body.appendChild(displayProjects());
 };
 
 export { loadPage };

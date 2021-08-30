@@ -1,18 +1,18 @@
 const project = (title) => {
-  let tasks = [];
+  let todos = [];
   const getTitle = () => title;
-  const getTasks = () => tasks;
+  const getTodos = () => todos;
   const addTodo = (todo) => {
-    tasks.push(todo);
+    todos.push(todo);
   };
   const removeTodo = (todo) => {
-    tasks.forEach((item) => {
-        if (item.title == todo.title) {
-            tasks.splice(tasks.indexOf(item), 1);
-        }
-    })
+    todos.forEach((item) => {
+      if (item.title == todo.title) {
+        todos.splice(todos.indexOf(item), 1);
+      }
+    });
   };
-  return { getTitle, getTasks, addTodo, removeTodo };
+  return { getTitle, getTodos, addTodo, removeTodo };
 };
 
 export { project };

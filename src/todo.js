@@ -1,5 +1,5 @@
 const todo = (title, description, dueDate, priority) => {
-  let status = "pending"
+  let status = "pending";
   const getTitle = () => title;
   const getDescription = () => description;
   const getDueDate = () => dueDate;
