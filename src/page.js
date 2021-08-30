@@ -1,41 +1,47 @@
 import { projectList } from "./projectList";
 
-const displayProjects = () => {
-  const content = document.createElement("div");
-  const projectsDiv = document.createElement("div");
-  const tasksDiv = document.createElement("div");
-  content.id = "content";
-  projectsDiv.id = "sidebar";
-  tasksDiv.id = "taskview";
+const displayTodos = (project) => {
+  const body = document.querySelector("main");
+  const todosDiv = document.createElement("div");
+  todosDiv.id = "taskview";
 
-  projectList.getProjects().forEach((project) => {
-    let title = document.createElement("h2");
-    title.className = "project";
-    title.textContent = `${project.getTitle()} ${project.getTodos().length}`;
-    title.addEventListener("click", () => {
-      title.classList.add("active");
-      project.getTodos().forEach((todo) => {
-        let title = document.createElement("h3");
-        title.className = "todo";
-        title.textContent = `${todo}`;
+  project.getTodos().forEach((todo) => {
+    let title = document.createElement("h3");
+    title.className = "todo";
+    title.textContent = todo.getTitle();
+    
+    todosDiv.appendChild(title);
+  })
 
-        tasksDiv.appendChild(title);
-      });
-    });
+  body.appendChild(todosDiv);
+};
 
-    projectsDiv.appendChild(title);
+const displayProject = (project) => {
+  let title = document.createElement("h2");
+  title.className = "project";
+  title.textContent = `${project.getTitle()} ${project.getTodos().length}`;
+  title.addEventListener("click", () => {
+    displayTodos(project);
   });
 
-  content.appendChild(projectsDiv);
-  content.appendChild(tasksDiv);
+  return title;
+};
 
-  return content;
+const displayProjectList = () => {
+  const projectsDiv = document.createElement("div");
+  projectsDiv.id = "sidebar";
+
+  projectList.getProjects().forEach((project) => {
+    projectsDiv.appendChild(displayProject(project));
+  });
+
+  return projectsDiv;
 };
 
 const loadPage = () => {
   const body = document.querySelector("main");
 
-  body.appendChild(displayProjects());
+  body.appendChild(displayProjectList());
 };
 
 export { loadPage };

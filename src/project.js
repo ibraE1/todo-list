@@ -1,9 +1,11 @@
+import { todo } from "./todo";
+
 const project = (title) => {
   let todos = [];
   const getTitle = () => title;
   const getTodos = () => todos;
-  const addTodo = (todo) => {
-    todos.push(todo);
+  const addTodo = (title, description, dueDate, priority) => {
+    todos.push(todo(title, description, dueDate, priority));
   };
   const removeTodo = (todo) => {
     todos.forEach((item) => {
