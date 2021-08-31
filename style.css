@@ -48,10 +48,3 @@ main {
   justify-content: space-between;
 }
 
-#display {
-  padding-top: 25px;
-}
-
-.todo h3 {
-  font-size: 14px;
-}
