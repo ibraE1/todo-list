@@ -10,23 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/domController.js":
+/*!******************************!*\
+  !*** ./src/domController.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"domController\": () => (/* binding */ domController)\n/* harmony export */ });\n/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./project */ \"./src/project.js\");\n/* harmony import */ var _projectList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectList */ \"./src/projectList.js\");\n\n\n\nconst domController = (() => {\n  const main = document.querySelector(\"main\");\n\n  const displayProjectList = () => {\n    const sidebar = document.createElement(\"div\");\n    sidebar.id = \"sidebar\";\n\n    _projectList__WEBPACK_IMPORTED_MODULE_1__.projectList.getProjects().forEach((project) => {\n      sidebar.appendChild(displayProject(project));\n    });\n\n    main.appendChild(sidebar);\n  };\n\n  const displayProject = (project) => {\n    const title = document.createElement(\"h2\");\n    title.className = \"title\";\n    title.textContent = project.getTitle();\n\n    const pendingTodos = document.createElement(\"h2\");\n    pendingTodos.className = \"pending-todos\";\n    pendingTodos.textContent = project.getTodos().length;\n\n    const projectDiv = document.createElement(\"div\");\n    projectDiv.className = \"project\";\n\n    projectDiv.appendChild(title);\n    projectDiv.appendChild(pendingTodos);\n\n    return projectDiv;\n  };\n\n  const displayTodos = () => {\n    const todosDiv = document.createElement(\"div\");\n\n    _projectList__WEBPACK_IMPORTED_MODULE_1__.projectList.getProjects().forEach((project) => {\n      project.getTodos().forEach((todo) => {\n        const title = document.createElement(\"h3\");\n        title.className = \"title\";\n        title.textContent = todo.getTitle();\n        todosDiv.appendChild(title);\n        todosDiv.appendChild(displayTodoDetails(todo));\n      });\n    });\n\n    main.appendChild(todosDiv);\n  };\n\n  const displayTodoDetails = (todo) => {\n    const detailsDiv = document.createElement(\"div\");\n    const description = document.createElement(\"p\");\n    description.textContent = todo.getDescription();\n    const dueDate = document.createElement(\"p\");\n    dueDate.textContent = todo.getDueDate();\n    const priority = document.createElement(\"p\");\n    priority.textContent = todo.getPriority();\n\n    detailsDiv.appendChild(description);\n    detailsDiv.appendChild(dueDate);\n    detailsDiv.appendChild(priority);\n\n    return detailsDiv;\n  };\n\n  return { displayProjectList, displayTodos };\n})();\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/domController.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./page */ \"./src/page.js\");\n\n\n(0,_page__WEBPACK_IMPORTED_MODULE_0__.loadPage)();\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/page.js":
-/*!*********************!*\
-  !*** ./src/page.js ***!
-  \*********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"loadPage\": () => (/* binding */ loadPage)\n/* harmony export */ });\n/* harmony import */ var _projectList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./projectList */ \"./src/projectList.js\");\n\n\nconst displayTodos = (project) => {\n  const body = document.querySelector(\"main\");\n  const todosDiv = document.createElement(\"div\");\n  todosDiv.id = \"taskview\";\n\n  project.getTodos().forEach((todo) => {\n    let title = document.createElement(\"h3\");\n    title.className = \"todo\";\n    title.textContent = todo.getTitle();\n    \n    todosDiv.appendChild(title);\n  })\n\n  body.appendChild(todosDiv);\n};\n\nconst displayProject = (project) => {\n  let title = document.createElement(\"h2\");\n  title.className = \"project\";\n  title.textContent = `${project.getTitle()} ${project.getTodos().length}`;\n  title.addEventListener(\"click\", () => {\n    displayTodos(project);\n  });\n\n  return title;\n};\n\nconst displayProjectList = () => {\n  const projectsDiv = document.createElement(\"div\");\n  projectsDiv.id = \"sidebar\";\n\n  _projectList__WEBPACK_IMPORTED_MODULE_0__.projectList.getProjects().forEach((project) => {\n    projectsDiv.appendChild(displayProject(project));\n  });\n\n  return projectsDiv;\n};\n\nconst loadPage = () => {\n  const body = document.querySelector(\"main\");\n\n  body.appendChild(displayProjectList());\n};\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/page.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _domController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./domController */ \"./src/domController.js\");\n\n\n_domController__WEBPACK_IMPORTED_MODULE_0__.domController.displayProjectList();\n_domController__WEBPACK_IMPORTED_MODULE_0__.domController.displayTodos();\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ }),
 
@@ -46,7 +46,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"projectList\": () => (/* binding */ projectList)\n/* harmony export */ });\n/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./project */ \"./src/project.js\");\n\n\nconst projectList = (() => {\n  let projects = [];\n  const getProjects = () => projects;\n  const addProject = (title) => {\n    projects.push((0,_project__WEBPACK_IMPORTED_MODULE_0__.project)(title));\n  };\n  const removeProject = (project) => {\n    projects.forEach((currentProject) => {\n      if (project.getTitle() == currentProject.getTitle()) {\n        projects.splice(projects.indexOf(project), 1);\n      }\n    });\n  };\n\n  return { getProjects, addProject, removeProject };\n})();\n\nprojectList.addProject(\"Inbox\");\nprojectList.getProjects()[0].addTodo(\"These\", \"\", \"\", \"low\");\nprojectList.getProjects()[0].addTodo(\"Are\", \"\", \"\", \"low\");\nprojectList.getProjects()[0].addTodo(\"Placeholder\", \"\", \"\", \"low\");\nprojectList.getProjects()[0].addTodo(\"Tasks\", \"\", \"\", \"low\");\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/projectList.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"projectList\": () => (/* binding */ projectList)\n/* harmony export */ });\n/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./project */ \"./src/project.js\");\n\n\nconst projectList = (() => {\n  let projects = [];\n  const getProjects = () => projects;\n  const addProject = (title) => {\n    projects.push((0,_project__WEBPACK_IMPORTED_MODULE_0__.project)(title));\n  };\n  const removeProject = (project) => {\n    projects.forEach((currentProject) => {\n      if (project.getTitle() == currentProject.getTitle()) {\n        projects.splice(projects.indexOf(project), 1);\n      }\n    });\n  };\n\n  return { getProjects, addProject, removeProject };\n})();\n\nprojectList.addProject(\"Inbox\");\nprojectList.getProjects()[0].addTodo(\"These\", \"todos\", \"\", \"low\");\nprojectList.getProjects()[0].addTodo(\"Are\", \"not\", \"\", \"medium\");\nprojectList.getProjects()[0].addTodo(\"Placeholder\", \"random\", \"\", \"low\");\nprojectList.getProjects()[0].addTodo(\"Tasks\", \"\", \"\", \"high\");\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/projectList.js?");
 
 /***/ }),
 

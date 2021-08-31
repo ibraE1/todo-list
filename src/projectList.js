@@ -18,9 +18,9 @@ const projectList = (() => {
 })();
 
 projectList.addProject("Inbox");
-projectList.getProjects()[0].addTodo("These", "", "", "low");
-projectList.getProjects()[0].addTodo("Are", "", "", "low");
-projectList.getProjects()[0].addTodo("Placeholder", "", "", "low");
-projectList.getProjects()[0].addTodo("Tasks", "", "", "low");
+projectList.getProjects()[0].addTodo("These", "todos", "", "low");
+projectList.getProjects()[0].addTodo("Are", "not", "", "medium");
+projectList.getProjects()[0].addTodo("Placeholder", "random", "", "low");
+projectList.getProjects()[0].addTodo("Tasks", "", "", "high");
 
 export { projectList };

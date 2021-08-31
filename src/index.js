@@ -1,3 +1,4 @@
-import { loadPage } from "./page";
+import { domController } from "./domController";
 
-loadPage();
+domController.displayProjectList();
+domController.displayTodos();
