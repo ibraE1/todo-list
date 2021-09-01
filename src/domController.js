@@ -3,18 +3,28 @@ import { projectList } from "./projectList";
 const domController = (() => {
   const main = document.querySelector("main");
 
-  const displayProjectList = () => {
+  const createProjectList = () => {
     const sidebar = document.createElement("div");
     sidebar.id = "sidebar";
 
     projectList.getProjects().forEach((project) => {
-      sidebar.appendChild(displayProject(project));
+      sidebar.appendChild(createProject(project));
     });
 
-    main.appendChild(sidebar);
+    const newProjectButton = document.createElement("button");
+    newProjectButton.id = "new-project";
+    newProjectButton.textContent = "Add Project";
+    newProjectButton.addEventListener("click", () => {
+      clearScreen();
+      projectList.addProject(prompt("Enter project name"));
+      displaySidebar();
+    });
+    sidebar.appendChild(newProjectButton);
+
+    return sidebar;
   };
 
-  const displayProject = (project) => {
+  const createProject = (project) => {
     const title = document.createElement("h2");
     title.className = "title";
     title.textContent = project.getTitle();
@@ -25,7 +35,9 @@ const domController = (() => {
 
     const projectDiv = document.createElement("div");
     projectDiv.className = "project";
-    projectDiv.addEventListener("click", () => toggleTodos(projectDiv, project));
+    projectDiv.addEventListener("click", () =>
+      toggleTodos(projectDiv, project)
+    );
 
     projectDiv.appendChild(title);
     projectDiv.appendChild(pendingTodos);
@@ -33,30 +45,46 @@ const domController = (() => {
     return projectDiv;
   };
 
-  const displayTodos = (project) => {
+  const createTodos = (project) => {
     const todosDiv = document.createElement("div");
-    todosDiv.className = "todos";
+    todosDiv.id = "todos";
 
     project.getTodos().forEach((todo) => {
-      todosDiv.appendChild(displayTodo(todo));
+      todosDiv.appendChild(createTodo(todo));
     });
 
-    main.appendChild(todosDiv);
+    const newTodoButton = document.createElement("button");
+    newTodoButton.id = "new-todo";
+    newTodoButton.textContent = "Add Todo";
+    newTodoButton.addEventListener("click", () => {
+      clearScreen();
+      project.addTodo(
+        prompt("Enter todo name"),
+        prompt("Enter description"),
+        prompt("Enter due date"),
+        prompt("Enter priority")
+      );
+      displaySidebar();
+      displayTodos(project);
+    });
+    todosDiv.appendChild(newTodoButton);
+
+    return todosDiv;
   };
 
-  const displayTodo = (todo) => {
+  const createTodo = (todo) => {
     const todoElement = document.createElement("div");
     const title = document.createElement("h3");
     title.className = "title";
     title.textContent = todo.getTitle();
 
     todoElement.appendChild(title);
-    todoElement.appendChild(displayTodoDetails(todo));
+    todoElement.appendChild(createTodoDetails(todo));
 
     return todoElement;
   };
 
-  const displayTodoDetails = (todo) => {
+  const createTodoDetails = (todo) => {
     const detailsDiv = document.createElement("div");
     const description = document.createElement("p");
     description.textContent = todo.getDescription();
@@ -72,23 +100,38 @@ const domController = (() => {
     return detailsDiv;
   };
 
+  const displaySidebar = () => {
+    main.appendChild(createProjectList());
+  };
+
+  const displayTodos = (project) => {
+    main.appendChild(createTodos(project));
+  };
+
   const toggleTodos = (projectDiv, project) => {
-    clearScreen();
-    if (projectDiv.className != "project") {
-      projectDiv.className = "project";
-    } else {
-      projectDiv.className = "project active";
+    clearScreen("todos");
+    if (projectDiv.className == "project") {
+      Array.from(projectDiv.parentNode.children).forEach((child) =>
+        child.classList.remove("active")
+      );
+      projectDiv.classList.add("active");
       displayTodos(project);
+    } else {
+      projectDiv.className = "project";
     }
   };
 
-  const clearScreen = () => {
-    if (main.children.length > 1) {
-      main.removeChild(main.lastChild);
+  const clearScreen = (parameter) => {
+    if (parameter == "todos") {
+      if (main.children.length > 1) {
+        main.removeChild(main.lastChild);
+      }
+    } else {
+      while (main.firstChild) main.removeChild(main.firstChild);
     }
   };
 
-  return { displayProjectList };
+  return { displaySidebar };
 })();
 
 export { domController };
