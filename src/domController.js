@@ -74,9 +74,11 @@ const domController = (() => {
 
   const createTodo = (todo) => {
     const todoElement = document.createElement("div");
+    todoElement.className = "todo";
     const title = document.createElement("h3");
     title.className = "title";
     title.textContent = todo.getTitle();
+    todoElement.addEventListener("click", () => toggleTodoDetails(todoElement));
 
     todoElement.appendChild(title);
     todoElement.appendChild(createTodoDetails(todo));
@@ -86,6 +88,8 @@ const domController = (() => {
 
   const createTodoDetails = (todo) => {
     const detailsDiv = document.createElement("div");
+    detailsDiv.className = "todo-details";
+    detailsDiv.style.display = "none";
     const description = document.createElement("p");
     description.textContent = todo.getDescription();
     const dueDate = document.createElement("p");
@@ -120,6 +124,14 @@ const domController = (() => {
       projectDiv.className = "project";
     }
   };
+
+  const toggleTodoDetails = (todoElement) => {
+    if (todoElement.lastChild.style.display == "none") {
+      todoElement.lastChild.style.display = "block";
+    } else {
+      todoElement.lastChild.style.display = "none";
+    }
+  }
 
   const clearScreen = (parameter) => {
     if (parameter == "todos") {
