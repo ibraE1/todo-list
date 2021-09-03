@@ -27,6 +27,10 @@ const domController = (() => {
   };
 
   const createProject = (project) => {
+    const icon = document.createElement("span");
+    icon.className = "material-icons-outlined";
+    icon.textContent = project.getTitle() == "Inbox" ? "inbox" : "list_alt";
+
     const title = document.createElement("h1");
     title.className = "project-title";
     title.textContent = project.getTitle();
@@ -48,6 +52,7 @@ const domController = (() => {
       }
     });
 
+    projectDiv.appendChild(icon);
     projectDiv.appendChild(title);
     projectDiv.appendChild(todoCount);
 
@@ -95,6 +100,9 @@ const domController = (() => {
     checkbox.className = "checkbox";
     checkbox.type = "checkbox";
     checkbox.name = "checkbox";
+    checkbox.addEventListener("click", () => {
+      todo.toggleStatus();
+    })
 
     const label = document.createElement("label");
     label.className = "todo-title";
