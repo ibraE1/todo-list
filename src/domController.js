@@ -43,12 +43,15 @@ const domController = (() => {
     projectDiv.className = "project";
     projectDiv.addEventListener("click", () => {
       if (projectDiv.className == "project") {
-        projectDiv.classList.add("active");
+        Array.from(projectDiv.parentNode.children).forEach((child) => {
+          child.classList.remove("active");
+        });
+        clearScreen("content");
         displayContent(project);
+        projectDiv.classList.add("active");
       } else {
         projectDiv.className = "project";
-        clearScreen();
-        displaySidebar();
+        clearScreen("content");
       }
     });
 
@@ -102,7 +105,7 @@ const domController = (() => {
     checkbox.name = "checkbox";
     checkbox.addEventListener("click", () => {
       todo.toggleStatus();
-    })
+    });
 
     const label = document.createElement("label");
     label.className = "todo-title";
@@ -177,17 +180,28 @@ const domController = (() => {
       );
       clearScreen();
       displaySidebar();
+      clickOnProject(project);
     });
 
     return newTodoButton;
   };
 
-  const clearScreen = () => {
-    while (main.firstChild) main.removeChild(main.firstChild);
+  const clickOnProject = (project) => {
+    const index = projectList.getProjects().indexOf(project);
+    document.querySelector("#projects").children[index].click();
+  };
+
+  const clearScreen = (parameter) => {
+    if (parameter) {
+      while (main.childElementCount > 1) main.removeChild(main.lastChild);
+    } else {
+      while (main.firstChild) main.removeChild(main.firstChild);
+    }
   };
 
   const displaySidebar = () => {
     main.appendChild(createSidebar());
+    clickOnProject(projectList.getProjects()[0]);
   };
 
   const displayContent = (project) => {
