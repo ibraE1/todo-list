@@ -101,22 +101,60 @@ const domController = (() => {
     label.htmlFor = "checkbox";
     label.textContent = todo.getTitle();
 
-    const expandButton = document.createElement("button");
-    expandButton.className = "expand-button";
-    const span = document.createElement("span");
-    span.className = "material-icons-outlined";
-    span.textContent = expand_more;
-    expandButton.appendChild(span);
+    const expandButton = createExpandButton();
+
+    const heading = document.createElement("div");
+    heading.className = "todo-heading";
+
+    heading.appendChild(checkbox);
+    heading.appendChild(label);
+    heading.appendChild(expandButton);
+
+    const description = document.createElement("p");
+    description.className = "description";
+    description.textContent = todo.getDescription();
+
+    const dueDate = document.createElement("p");
+    dueDate.className = "due-date";
+    dueDate.textContent = todo.getDueDate();
+
+    const details = document.createElement("div");
+    details.className = "todo-details";
+
+    details.appendChild(description);
+    details.appendChild(dueDate);
 
     const todoDiv = document.createElement("div");
     todoDiv.className = `todo ${todo.getPriority()}`;
 
-    todoDiv.appendChild(checkbox);
-    todoDiv.appendChild(label);
-    todoDiv.appendChild(expandButton);
+    todoDiv.appendChild(heading);
+    todoDiv.appendChild(details);
 
     return todoDiv;
-  } 
+  };
+
+  const createExpandButton = () => {
+    const expandButton = document.createElement("button");
+    expandButton.className = "expand-button";
+    const span = document.createElement("span");
+    span.className = "material-icons-outlined";
+    span.textContent = "expand_more";
+
+    expandButton.appendChild(span);
+
+    expandButton.addEventListener("click", () => {
+      const details = expandButton.parentElement.parentElement.lastChild;
+      if (details.style.display == "none") {
+        details.style.display = "flex";
+        span.textContent = "expand_less";
+      } else {
+        details.style.display = "none";
+        span.textContent = "expand_more";
+      }
+    });
+
+    return expandButton;
+  };
 
   const createNewTodoButton = (project) => {
     const newTodoButton = document.createElement("button");

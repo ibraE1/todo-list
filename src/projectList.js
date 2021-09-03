@@ -1,7 +1,7 @@
 import { project } from "./project";
 
 const projectList = (() => {
-  let projects = [project("Inbox")];
+  let projects = [];
   const getProjects = () => projects;
   const addProject = (title) => {
     projects.push(project(title));
