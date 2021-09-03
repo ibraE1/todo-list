@@ -164,7 +164,7 @@ main {
 
 .todo-details {
   color: #78a1bb;
-  display: flex;
+  display: none;
   justify-content: space-between;
 }
 
