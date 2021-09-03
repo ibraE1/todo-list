@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" rel="stylesheet" />
+    <link
+      href="../node_modules/material-icons/iconfont/outlined.css"
+      rel="stylesheet"
+    />
+    <title>Todo</title>
+  </head>
+  <body>
+    <main>
+      <div id="sidebar">
+        <h1 id="title">Todo List</h1>
+
+        <div id="projects">
+          <div class="project active">
+            <span class="material-icons-outlined">inbox</span>
+            <h1 class="project-title">Inbox</h1>
+            <h1 class="todo-count">4</h1>
+          </div>
+          <div class="project">
+            <span class="material-icons-outlined">star</span>
+            <h1 class="project-title">Starred</h1>
+            <h1 class="todo-count">2</h1>
+          </div>
+        </div>
+
+        <button id="new-project">+ Add Project</button>
+      </div>
+
+      <div id="content">
+        <h2 id="content-heading">Inbox</h2>
+
+        <div id="todos">
+          <div class="todo high">
+            <div class="todo-heading">
+              <input class="checkbox" type="checkbox" name="checkbox" />
+              <label class="todo-title" for="checkbox">Wash Dishes</label>
+              <button class="expand-button">
+                <span class="material-icons-outlined">expand_less</span>
+              </button>
+            </div>
+            <div class="todo-details">
+              <p class="description">Clean!</p>
+              <p class="due-date">Due: 2/9/2021</p>
+            </div>
+          </div>
+
+          <div class="todo medium">
+            <div class="todo-heading">
+              <input class="checkbox" type="checkbox" name="checkbox" />
+              <label class="todo-title" for="checkbox">Feed Cat</label>
+              <button class="expand-button">
+                <span class="material-icons-outlined">expand_less</span>
+              </button>
+            </div>
+            <div class="todo-details">
+              <p class="description">Happy Cat Owner</p>
+              <p class="due-date">Due: 3/9/2021</p>
+            </div>
+          </div>
+
+          <div class="todo high">
+            <div class="todo-heading">
+              <input class="checkbox" type="checkbox" name="checkbox" />
+              <label class="todo-title" for="checkbox">Workout</label>
+              <button class="expand-button">
+                <span class="material-icons-outlined">expand_less</span>
+              </button>
+            </div>
+            <div class="todo-details">
+              <p class="description">Fit</p>
+              <p class="due-date">Due: 4/9/2021</p>
+            </div>
+          </div>
+        </div>
+
+        <button id="new-todo">+ Add Todo</button>
+      </div>
+    </main>
+    <script src="main.js"></script>
+  </body>
+</html>

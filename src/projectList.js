@@ -1,7 +1,7 @@
 import { project } from "./project";
 
 const projectList = (() => {
-  let projects = [];
+  let projects = [project("Inbox")];
   const getProjects = () => projects;
   const addProject = (title) => {
     projects.push(project(title));
@@ -16,11 +16,5 @@ const projectList = (() => {
 
   return { getProjects, addProject, removeProject };
 })();
-
-projectList.addProject("Inbox");
-projectList.getProjects()[0].addTodo("These", "todos", "", "low");
-projectList.getProjects()[0].addTodo("Are", "not", "", "medium");
-projectList.getProjects()[0].addTodo("Placeholder", "random", "", "low");
-projectList.getProjects()[0].addTodo("Tasks", "", "", "high");
 
 export { projectList };
