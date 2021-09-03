@@ -1,8 +1,10 @@
-node_modules
 .eslintrc.json
 
-<<<<<<< HEAD
-!node_modules/material-icons
-=======
-!node_modules/material-icons/iconfont/outlined.css
->>>>>>> 8cfe5398eb7d2e5bf0d4b7b4c9c988840f516844
+node_modules/
+!node_modules/
+
+node_modules/*
+!node_modules/material-icons/
+
+node_modules/material-icons/*
+!node_modules/material-icons/iconfont/
