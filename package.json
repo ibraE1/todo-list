@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/ibraE1/todo-list#readme",
   "devDependencies": {
+    "css-loader": "^6.2.0",
     "date-fns": "^2.23.0",
+    "material-icons": "^1.2.1",
+    "style-loader": "^3.2.1",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"
   }

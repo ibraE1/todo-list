@@ -1,4 +1,5 @@
 import { projectList } from "./projectList";
+import './style.css';
 
 const domController = (() => {
   const main = document.querySelector("main");
