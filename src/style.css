@@ -170,6 +170,12 @@ main {
   justify-content: space-between;
 }
 
+.delete-todo {
+  color: #78a1bb;
+  background-color: white;
+  border: none;
+}
+
 #new-todo {
   color: #283044;
   background-color: white;

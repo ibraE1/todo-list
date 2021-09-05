@@ -1,3 +1,5 @@
 import { domController } from "./domController";
+import './style.css';
 
-domController.displaySidebar();
+
+domController.displaySidebar(0);

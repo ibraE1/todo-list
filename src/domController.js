@@ -1,5 +1,4 @@
 import { projectList } from "./projectList";
-import './style.css';
 
 const domController = (() => {
   const main = document.querySelector("main");
@@ -70,7 +69,7 @@ const domController = (() => {
     newProjectButton.addEventListener("click", () => {
       projectList.addProject(prompt("Enter Project Name"));
       clearScreen();
-      displaySidebar();
+      displaySidebar(projectList.getProjects().length - 1);
     });
 
     return newProjectButton;
@@ -84,7 +83,7 @@ const domController = (() => {
     const todos = document.createElement("div");
     todos.id = "todos";
     project.getTodos().forEach((todo) => {
-      todos.appendChild(createTodo(todo));
+      todos.appendChild(createTodo(project, todo));
     });
 
     const newTodoButton = createNewTodoButton(project);
@@ -99,7 +98,7 @@ const domController = (() => {
     return content;
   };
 
-  const createTodo = (todo) => {
+  const createTodo = (project, todo) => {
     const checkbox = document.createElement("input");
     checkbox.className = "checkbox";
     checkbox.type = "checkbox";
@@ -130,11 +129,14 @@ const domController = (() => {
     dueDate.className = "due-date";
     dueDate.textContent = todo.getDueDate();
 
+    const deleteButton = createDeleteTodo(project, todo);
+
     const details = document.createElement("div");
     details.className = "todo-details";
 
     details.appendChild(description);
     details.appendChild(dueDate);
+    details.appendChild(deleteButton);
 
     const todoDiv = document.createElement("div");
     todoDiv.className = `todo ${todo.getPriority()}`;
@@ -166,6 +168,20 @@ const domController = (() => {
     });
 
     return expandButton;
+  };
+
+  const createDeleteTodo = (project, todo) => {
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "material-icons-outlined delete-todo";
+    deleteButton.textContent = "delete_outline";
+
+    deleteButton.addEventListener("click", () => {
+      project.removeTodo(todo);
+      clearScreen();
+      displaySidebar(projectList.getProjects().indexOf(project));
+    });
+
+    return deleteButton;
   };
 
   const createNewTodoButton = (project) => {
@@ -200,9 +216,9 @@ const domController = (() => {
     }
   };
 
-  const displaySidebar = () => {
+  const displaySidebar = (index) => {
     main.appendChild(createSidebar());
-    clickOnProject(projectList.getProjects()[0]);
+    if (index !== undefined) clickOnProject(projectList.getProjects()[index]);
   };
 
   const displayContent = (project) => {
